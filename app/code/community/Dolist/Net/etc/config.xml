@@ -4,7 +4,7 @@
 
     <modules>
         <Dolist_Net>
-            <version>2.0.0.8</version>
+            <version>2.0.1.1</version>
         </Dolist_Net>
     </modules>
 
@@ -340,14 +340,7 @@
                 </connection>
             </dolist_write>
         </resources>
-        
-        <rewrite>
-            <dolist_adminhtml_customerdolist>
-                <from><![CDATA[#^/admin/customerdolist/#]]></from>
-                <to>/dolist_adminhtml/customerdolist/</to>
-            </dolist_adminhtml_customerdolist>
-        </rewrite>
-        
+
         <events>
             <newsletter_subscriber_save_before>
                 <observers>
@@ -374,17 +367,10 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <dolist before="Mage_Adminhtml">Dolist_Net_Adminhtml</dolist>
+                        <dolist_adminhtml after="Mage_Adminhtml">Dolist_Net_Adminhtml</dolist_adminhtml>
                     </modules>
                 </args>
             </adminhtml>
-            <dolist_adminhtml>
-                <use>admin</use>
-                <args>
-                    <module>Dolist_Net_Adminhtml</module>
-                    <frontName>dolist_adminhtml</frontName>
-                </args>
-            </dolist_adminhtml>
         </routers>
     </admin>
     
