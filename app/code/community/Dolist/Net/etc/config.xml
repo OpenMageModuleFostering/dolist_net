@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+        <Dolist_Net>
+            <version>2.0.0.8</version>
+        </Dolist_Net>
+    </modules>
+
+    <default>
+        <dolist>
+            <dolist_v8>
+                <active>0</active>
+                <group>CustomStr30</group>
+                <calculatedfieds_date_mode>0</calculatedfieds_date_mode>
+                <export_page_size>5000</export_page_size>
+            </dolist_v8>
+            <dolist_emt>
+                <active>0</active>
+                <asynchronous>0</asynchronous>
+                <default_template>2</default_template>
+            </dolist_emt>
+        </dolist>
+    </default>
+    
+    <dolistparams>
+        <send_message>
+            <proxywsdl>http://api.emt.dolist.net/V3/MessageService.svc?wsdl</proxywsdl>
+            <location>http://api.emt.dolist.net/V3/MessageService.svc/soap1.1</location>
+        </send_message>
+        <get_template_list>
+            <proxywsdl>http://api.emt.dolist.net/V3/TemplateService.svc?wsdl</proxywsdl>
+            <location>http://api.emt.dolist.net/V3/TemplateService.svc/soap1.1</location>
+        </get_template_list>
+        <get_authentication_v8_token>
+            <proxywsdl>http://api.dolist.net/V2/AuthenticationService.svc?wsdl</proxywsdl>
+            <location>http://api.dolist.net/V2/AuthenticationService.svc/soap1.1</location>
+        </get_authentication_v8_token>
+        <get_authentication_emt_token>
+            <proxywsdl>http://api.emt.dolist.net/V3/AuthenticationService.svc?wsdl</proxywsdl>
+            <location>http://api.emt.dolist.net/V3/AuthenticationService.svc/soap1.1</location>
+        </get_authentication_emt_token>
+        <create_import>
+            <proxywsdl>http://api.dolist.net/V2/ImportService.svc?wsdl</proxywsdl>
+            <location>http://api.dolist.net/V2/ImportService.svc/soap1.1</location>
+        </create_import>
+        <get_contact>
+            <proxywsdl>http://api.dolist.net/v2/ContactManagementService.svc?wsdl</proxywsdl>
+            <location>http://api.dolist.net/V2/ContactManagementService.svc/soap1.1</location>
+        </get_contact>
+        <get_field_list>
+            <proxywsdl>http://api.dolist.net/CustomFieldManagementService.svc?wsdl</proxywsdl>
+            <location>http://api.dolist.net/CustomFieldManagementService.svc/soap1.1</location>
+        </get_field_list>
+        <ftp>
+            <host>ftp.dolist.net</host>
+            <upload_contact_directory>/upload/contact</upload_contact_directory>
+            <unsubscribe_contact_directory>/upload/contact/unsubscribe</unsubscribe_contact_directory>
+        </ftp>
+        <optout_mapping>
+            <subscribed>
+                <dolist_value>0</dolist_value>
+                <magento_value>1</magento_value>
+            </subscribed>
+            <not_active>
+                <dolist_value>33</dolist_value>
+                <magento_value>2</magento_value>
+            </not_active>
+            <unsubscribed>
+                <dolist_value>133,1,2,5,67,128,129,130,131,132</dolist_value>
+                <magento_value>3</magento_value>
+            </unsubscribed>
+            <temporary_error>
+                <dolist_value>4,6,150</dolist_value>
+                <magento_value>5</magento_value>
+            </temporary_error>
+            <final_error>
+                <dolist_value>7,66,99,200</dolist_value>
+                <magento_value>6</magento_value>
+            </final_error>
+            <spam>
+                <dolist_value>68</dolist_value>
+                <magento_value>7</magento_value>
+            </spam>
+        </optout_mapping>
+        <country_mapping>
+            
+        </country_mapping>
+        <contact_export_row_adapter>
+            <default>
+                <adapter>dolist/dolistv8_export_adapter_default</adapter>
+            </default>
+            <email>
+                <header>Email</header>
+            </email>
+            <group_id />
+            <firstname>
+                <header>FirstName</header>
+            </firstname>
+            <lastname>
+                <header>LastName</header>
+            </lastname>
+            <dob>
+                <adapter>dolist/dolistv8_export_adapter_date_default</adapter>
+                <header>Birthdate</header>
+            </dob>
+            <company>
+                <adapter>dolist/dolistv8_export_adapter_company</adapter>
+                <header>Company</header>
+            </company>
+            <address1>
+                <adapter>dolist/dolistv8_export_adapter_address1</adapter>
+                <header>Address 1</header>
+            </address1>
+            <address2>
+                <adapter>dolist/dolistv8_export_adapter_address2</adapter>
+                <header>Address 2</header>
+            </address2>
+            <address3>
+                <adapter>dolist/dolistv8_export_adapter_address3</adapter>
+                <header>Address 3</header>
+            </address3>
+            <postcode>
+                <adapter>dolist/dolistv8_export_adapter_postcode</adapter>
+                <header>ZipCode</header>
+            </postcode>
+            <city>
+                <adapter>dolist/dolistv8_export_adapter_city</adapter>
+                <header>City</header>
+            </city>
+            <country>
+                <adapter>dolist/dolistv8_export_adapter_country</adapter>
+                <header>CountryID</header>
+            </country>
+            <phone>
+                <adapter>dolist/dolistv8_export_adapter_phone</adapter>
+                <header>Phone</header>
+            </phone>
+            <fax>
+                <adapter>dolist/dolistv8_export_adapter_fax</adapter>
+                <header>Fax</header>
+            </fax>
+            
+            <!--
+                Specific attributes, for example Default billing address, date of birth
+            -->
+            
+            <!-- Calculated attributes -->
+            <!-- Custom int fields -->
+            <calculated_attributes>
+                <varchar />
+                <int>
+                    <is_subscriber>
+                        <label>Subscriber state of the customer</label>
+                        <adapter />
+                    </is_subscriber>
+                    <first_order_amount>
+                        <label>First order amount excluding tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_firstOrderAmountExclTax</adapter>
+                    </first_order_amount>
+                    <first_order_amount_with_vat>
+                        <label>First order amount including tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_firstOrderAmountInclTax</adapter>
+                    </first_order_amount_with_vat>
+                    <last_order_amount>
+                        <label>Last order amount excluding tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_lastOrderAmountExclTax</adapter>
+                    </last_order_amount>
+                    <last_order_amount_with_vat>
+                        <label>Last order amount including tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_lastOrderAmountInclTax</adapter>
+                    </last_order_amount_with_vat>
+                    <total_orders_amount>
+                        <label>Total order amount excluding tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_totalOrderAmountExclTax</adapter>
+                    </total_orders_amount>
+                    <total_orders_amount_with_vat>
+                        <label>Total order amount including tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_totalOrderAmountInclTax</adapter>
+                    </total_orders_amount_with_vat>
+                    <avg_order_amount_excl_tax>
+                        <label>Average order amount excluding tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_avgOrderAmountExclTax</adapter>
+                    </avg_order_amount_excl_tax>
+                    <avg_order_amount_incl_tax>
+                        <label>Average order amount including tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_avgOrderAmountInclTax</adapter>
+                    </avg_order_amount_incl_tax>
+                    <avg_nb_products_per_order>
+                        <label>Average number of ordered products per order</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_avgNbProductsPerOrder</adapter>
+                    </avg_nb_products_per_order>
+                    <average_unique_product_count>
+                        <label>Average number of different products per order</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_avgNbDifferentProductsPerOrder</adapter>
+                    </average_unique_product_count>
+                    <average_product_count_by_command_line>
+                        <label>Average number of product per order line</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_avgNbDifferentProductsPerOrderLine</adapter>
+                    </average_product_count_by_command_line>
+                    <total_product_count>
+                        <label>Total number of ordered products</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_totalOrderedProducts</adapter>
+                    </total_product_count>
+                    <total_orders_count>
+                        <label>Total number of orders</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_totalOrders</adapter>
+                    </total_orders_count>
+                    <last_orders_range>
+                        <label>Days number between the last two orders</label>
+                        <adapter />
+                    </last_orders_range>
+
+                    <!-- Checkout quote -->
+                    <last_unordered_cart_amount>
+                        <label>Last not ordered cart amount excluding tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_lastNotOrderedCartAmountExclTax</adapter>
+                    </last_unordered_cart_amount>
+                    <last_unordered_cart_amount_with_vat>
+                        <label>Last not ordered cart amount including tax</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_lastNotOrderedCartAmountInclTax</adapter>
+                    </last_unordered_cart_amount_with_vat>
+
+                    <!-- Promotions -->
+                    <discount_rule_count>
+                        <label>Number of promotion rules used</label>
+                        <adapter>dolist/dolistv8_export_adapter_int_nbPromotionRulesUsed</adapter>
+                    </discount_rule_count>
+                </int>
+                
+                <!-- Custom date fields -->
+                <datetime>
+                    <first_order_date>
+                        <label>First order date</label>
+                        <adapter>dolist/dolistv8_export_adapter_date_firstOrder</adapter>
+                    </first_order_date>
+                    <last_order_date>
+                        <label>Last order date</label>
+                        <adapter>dolist/dolistv8_export_adapter_date_lastOrder</adapter>
+                    </last_order_date>
+                    <last_unordered_cart_date>
+                        <label>Last not ordered cart date</label>
+                        <adapter>dolist/dolistv8_export_adapter_date_lastQuoteNotOrdered</adapter>
+                    </last_unordered_cart_date>
+                </datetime>
+            </calculated_attributes>
+        </contact_export_row_adapter>
+        <temporary_errors><![CDATA[MethodUsageQuotaExceededException,TemplateNotEnabledException,DeliverabilityPackDisabledException,AuthenticationException]]></temporary_errors>
+        <limitreached_errors><![CDATA[MethodUsageQuotaExceededException]]></limitreached_errors>
+    </dolistparams>
+
+    <global>
+
+        <helpers>
+            <dolist>
+                <class>Dolist_Net_Helper</class>
+            </dolist>
+        </helpers>
+
+        <blocks>
+            <dolist>
+                <class>Dolist_Net_Block</class>
+            </dolist>
+            
+            <!-- Slight rewrites to dispatch event => grabbed in Adminhtml Observer -->
+            <adminhtml>
+                <rewrite>
+                    <customer_edit>Dolist_Net_Block_Adminhtml_Customer_Edit</customer_edit>
+                </rewrite>
+            </adminhtml>
+            <enterprise_customersegment>
+                <rewrite>
+                    <adminhtml_customersegment_edit>Dolist_Net_Block_Adminhtml_Customersegment_Edit</adminhtml_customersegment_edit>
+                </rewrite>
+            </enterprise_customersegment>
+        </blocks>
+        
+        <models>
+            <dolist>
+                <class>Dolist_Net_Model</class>
+                <resourceModel>dolist_mysql4</resourceModel>
+            </dolist>
+            
+            <!-- Rewrite native email template send method to use Doslit-EMT webservice instead -->
+            <core>
+                <rewrite>
+                    <email_template>Dolist_Net_Model_Dolistemt_Email_Template</email_template>
+                </rewrite>
+            </core>
+            
+            <!-- Rewrite enterprise customer segment model only to add event prefix, then to plug observer -->
+            <enterprise_customersegment>
+                <rewrite>
+                    <segment>Dolist_Net_Model_Customersegment</segment>
+                </rewrite>
+            </enterprise_customersegment>
+            
+            <dolist_mysql4>
+                <class>Dolist_Net_Model_Mysql4</class>
+                <entities>
+                    <dolistemt_template>
+                        <table>dolist_dolistemt_template</table>
+                    </dolistemt_template>
+                    <dolistemt_message_queued>
+                        <table>dolist_dolistemt_message_queue</table>
+                    </dolistemt_message_queued>
+                    <dolistv8_calculatedfields>
+                        <table>dolist_dolistv8_calculatedfields</table>
+                    </dolistv8_calculatedfields>
+                    <dolistv8_customfields>
+                        <table>dolist_dolistv8_customfields</table>
+                    </dolistv8_customfields>
+                    <reports>
+                        <table>dolist_reports</table>
+                    </reports>
+                </entities>
+            </dolist_mysql4>
+        </models>
+
+        <resources>
+            <dolist_setup>
+                <setup>
+                    <module>Dolist_Net</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dolist_setup>
+            
+            <dolist_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dolist_read>
+            
+            <dolist_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dolist_write>
+        </resources>
+        
+        <rewrite>
+            <dolist_adminhtml_customerdolist>
+                <from><![CDATA[#^/admin/customerdolist/#]]></from>
+                <to>/dolist_adminhtml/customerdolist/</to>
+            </dolist_adminhtml_customerdolist>
+        </rewrite>
+        
+        <events>
+            <newsletter_subscriber_save_before>
+                <observers>
+                    <dolist_update_subscriber>
+                        <class>dolist/observer</class>
+                        <method>updateSubscriber</method>
+                    </dolist_update_subscriber>
+                </observers>
+            </newsletter_subscriber_save_before>
+            <customer_login>
+                <observers>
+                    <dolist_status_warning>
+                        <class>dolist/observer</class>
+                        <method>warnCustomerDolistStatus</method>
+                    </dolist_status_warning>
+                </observers>
+            </customer_login>
+        </events>
+        
+    </global>
+    
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <dolist before="Mage_Adminhtml">Dolist_Net_Adminhtml</dolist>
+                    </modules>
+                </args>
+            </adminhtml>
+            <dolist_adminhtml>
+                <use>admin</use>
+                <args>
+                    <module>Dolist_Net_Adminhtml</module>
+                    <frontName>dolist_adminhtml</frontName>
+                </args>
+            </dolist_adminhtml>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Dolist_Net>
+                    <files>
+                        <default>Dolist_Net.csv</default>
+                    </files>
+                </Dolist_Net>
+            </modules>
+        </translate>
+
+        <layout>
+            <updates>
+                <dolist>
+                    <file>dolist.xml</file>
+                </dolist>
+            </updates>
+        </layout>
+        
+        <events>
+            <customersegment_segment_save_after>
+                <observers>
+                    <dolist_customersegment_check_save>
+                        <class>dolist/adminhtml_observer</class>
+                        <method>checkCustomerSegmentSave</method>
+                    </dolist_customersegment_check_save>
+                </observers>
+            </customersegment_segment_save_after>
+            <admin_system_config_changed_section_dolist>
+                <observers>
+                    <dolist_remove_flags>
+                        <class>dolist/adminhtml_observer</class>
+                        <method>removeDolistFlags</method>
+                    </dolist_remove_flags>
+                </observers>
+            </admin_system_config_changed_section_dolist>
+            <dolist_customersegment_export>
+                <observers>
+                    <add_customer_segment_export_button>
+                        <class>dolist/adminhtml_observer</class>
+                        <method>addCustomerSegmentExportButton</method>
+                    </add_customer_segment_export_button>
+                </observers>
+            </dolist_customersegment_export>
+            <dolist_status_adminhtml_customer_warning>
+                <observers>
+                    <warn_customer_dolist_status_adminhtml>
+                        <class>dolist/adminhtml_observer</class>
+                        <method>warnCustomerDolistStatus</method>
+                    </warn_customer_dolist_status_adminhtml>
+                </observers>
+            </dolist_status_adminhtml_customer_warning>
+        </events>
+    </adminhtml>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Dolist_Net>
+                    <files>
+                        <default>Dolist_Net.csv</default>
+                    </files>
+                </Dolist_Net>
+            </modules>
+        </translate>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <dolist_sales_order_place_after>
+                        <class>dolist/observer</class>
+                        <method>onNewOrder</method>
+                    </dolist_sales_order_place_after>
+                </observers>
+            </sales_order_place_after>
+        </events>
+    </frontend>
+    
+    <crontab>
+        <jobs>
+            <dolist_prepare_nightly_differential_export>
+                <!-- Add all Dolist-V8 enabled stores to dolist_differential_export list (before dolist_differential_export)
+                Must be scheduled before dolist_differential_export -->
+                <schedule><cron_expr>55 1 * * *</cron_expr></schedule>
+                <run>
+                    <model>dolist/observer::prepareNightlyDifferentialExport</model>
+                </run>
+            </dolist_prepare_nightly_differential_export>
+            <dolist_differential_export>
+                <!-- Either called every night @ 2:00am (before dolist_contact_import),
+                either called manually by Back Office button -->
+                <schedule><cron_expr>5 2 * * *</cron_expr></schedule>
+                <run>
+                    <model>dolist/observer::differentialExport</model>
+                </run>
+            </dolist_differential_export>
+            <dolist_full_export>
+                <!-- Not performed automatically, but called by button -->
+                <run>
+                    <model>dolist/observer::fullExport</model>
+                </run>
+            </dolist_full_export>
+            <dolist_contact_import>
+                <!-- Every night @ 3:00am -->
+                <schedule><cron_expr>0 3 * * *</cron_expr></schedule>
+                <run>
+                    <model>dolist/observer::contactImport</model>
+                </run>
+            </dolist_contact_import>
+            <dolist_send_queued_messages>
+                <!-- Every 5 minutes -->
+                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <run>
+                    <model>dolist/observer::sendQueuedMessages</model>
+                </run>
+            </dolist_send_queued_messages>
+            <dolist_segment_export>
+                <!-- Every 5 minutes -->
+                <schedule><cron_expr>0 5 * * *</cron_expr></schedule>
+                <run>
+                    <model>dolist/observer::cronSegmentExport</model>
+                </run>
+            </dolist_segment_export>
+        </jobs>
+    </crontab>
+
+</config>

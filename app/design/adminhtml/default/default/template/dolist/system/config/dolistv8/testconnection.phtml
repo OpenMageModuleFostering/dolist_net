@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    function testV8Connection() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+
+        params = {
+            accountid: $('dolist_dolist_v8_accountid').value,
+            authentication_key: $('dolist_dolist_v8_authentication_key').value,
+            login: $('dolist_dolist_v8_login').value,
+            password: $('dolist_dolist_v8_password').value,
+            storeId: <?php echo $this->getStoreId() ?>
+        };
+        
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            parameters: params,
+            onSuccess: function(response) {
+                result = '<?php echo $this->__('Connection KO. Try again?') ?>';
+                try {
+                    var connectionStatus = response.responseJSON.connectionStatus;
+                    
+                    if (connectionStatus == 1) {
+                        result = '<?php echo $this->__('Connection OK') ?>';
+                        elem.removeClassName('fail').addClassName('success')
+                        
+                    } else {
+                        elem.removeClassName('success').addClassName('fail')
+                        
+                        // Display error if any
+                        if (response.responseJSON.error != 0) {
+                            if (typeof response.responseJSON.error == 'string') {
+                                alert(response.responseJSON.error);
+                            } else {
+                                alert(
+                                    "Description: " + response.responseJSON.error.Description + "\n" +
+                                    "ErrorCode: " + response.responseJSON.error.ErrorCode + "\n" +
+                                    "ErrorCodeType: " + response.responseJSON.error.ErrorCodeType + "\n" +
+                                    "Message: " + response.responseJSON.error.Message + "\n" +
+                                    "Ticket: " + response.responseJSON.error.Ticket + "\n"
+                                );
+                            };
+                        }
+                    }
+                } catch (e) {
+                    elem.removeClassName('success').addClassName('fail')
+                }
+                $('dolist_v8_connection_test_result').update(result);
+            }
+        });
+    }
+    
+    function resetV8TestButton() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+        var defaultmsg = '<?php echo $this->escapeHtml($this->getButtonLabel()) ?>';
+        elem.removeClassName('success').removeClassName('fail');
+        $('dolist_v8_connection_test_result').update(defaultmsg);
+    }
+    
+    // Reset test button if fields are modified
+    $('dolist_dolist_v8_accountid').observe('change', resetV8TestButton);
+    $('dolist_dolist_v8_authentication_key').observe('change', resetV8TestButton);
+    $('dolist_dolist_v8_login').observe('change', resetV8TestButton);
+    $('dolist_dolist_v8_password').observe('change', resetV8TestButton);
+</script>
+<button onclick="javascript:testV8Connection(); return false;" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+    <span id="dolist_v8_connection_test_result"><?php echo $this->escapeHtml($this->getButtonLabel()) ?></span>
+</button>

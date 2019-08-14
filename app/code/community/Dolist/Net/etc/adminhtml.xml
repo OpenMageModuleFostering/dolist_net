@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config>
+    
+    <menu>
+        <customer>
+            <children>
+                <customerdolist translate="title" module="dolist">
+                    <title>Dolist</title>
+                    <action>adminhtml/customerdolist</action>
+                    <sort_order>150</sort_order>
+                </customerdolist>
+            </children>
+        </customer>
+    </menu>
+    
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <customer>
+                        <children>
+                            <customerdolist  translate="title" module="dolist">
+                                <title>Dolist</title>
+                                <sort_order>150</sort_order>
+                            </customerdolist>
+                        </children>
+                    </customer>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <dolist />
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    
+</config>

@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Dolist_Net",
+    "type": "magento-module",
+    "license": "OSL-3.0",
+    "homepage": "",
+    "description": "Official extension for Dolist email marketing solution.",
+    "authors": [
+    {
+        "name": "Dolist",
+        "email": "magento@dolist.net"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

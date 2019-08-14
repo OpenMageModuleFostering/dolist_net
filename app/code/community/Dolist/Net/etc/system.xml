@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <dolist translate="label" module="dolist">
+            <label>Dolist</label>
+            <tab>customer</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>900</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <dolist_v8 translate="label">
+                    <label>Dolist-V8</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <accountid translate="label">
+                            <label>AccountID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </accountid>
+                        <authentication_key translate="label">
+                            <label>Authentication key</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>This key must be generated from your Dolist-V8 account, in section G.2. Webservices.</comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </authentication_key>
+                        <login translate="label">
+                            <label>Login</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </login>
+                        <password translate="label">
+                            <label>Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                        <test_connect_wizard translate="button_label">
+                            <label></label>
+                            <button_label>Test Dolist-V8 connection</button_label>
+                            <frontend_model>dolist/adminhtml_system_config_dolistv8_testconnection</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </test_connect_wizard>
+                        <export_page_size translate="label">
+                            <label>Export page size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>103</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </export_page_size>
+
+                    </fields>
+                </dolist_v8>
+                <dolist_emt translate="label">
+                    <label>Dolist-EMT</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <asynchronous translate="label">
+                            <label>Always queue mail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </asynchronous>
+                        <accountid translate="label">
+                            <label>AccountID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </accountid>
+                        <authentication_key translate="label">
+                            <label>Authentication key</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>This key must be generated from your Dolist-EMT account, in section G.2. Webservices.</comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </authentication_key>
+                        <test_connect_wizard translate="button_label">
+                            <label></label>
+                            <button_label>Test Dolist-EMT connection</button_label>
+                            <frontend_model>dolist/adminhtml_system_config_dolistemt_testconnection</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Connection test refreshes Dolist-EMT template list</comment>
+                        </test_connect_wizard>
+                        <default_template translate="label">
+                            <label>Default template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dolist/system_config_source_dolistemt_defaulttemplate</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </default_template>
+                        <template_mapping translate="label">
+                            <label>Template mapping</label>
+                            <frontend_model>dolist/adminhtml_system_config_dolistemt_templatemapping</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Save configuration before adding first template mapping</comment>
+                        </template_mapping>
+                    </fields>
+                </dolist_emt>
+            </groups>
+        </dolist>
+    </sections>
+</config>

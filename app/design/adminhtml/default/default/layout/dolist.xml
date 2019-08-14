@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout>
+    <adminhtml_customerdolist_index>
+        <reference name="content">
+            <block type="dolist/adminhtml_edit" name="dolist_edit" />
+        </reference>
+        <reference name="left">
+            <block type="dolist/adminhtml_system_config_switcher" name="adminhtml.system.config.switcher" before="-" template="dolist/store/switcher.phtml"/>
+            <block type="dolist/adminhtml_edit_tabs" name="dolist_edit_tabs">
+                <block type="dolist/adminhtml_edit_tab_export" name="dolist_edit_tab_export" template="dolist/customerexport.phtml" />
+                <block type="dolist/adminhtml_edit_tab_configuration" name="dolist_tab_configuration" template="dolist/configuration.phtml" />
+                <action method="addTab">
+                    <name>dolist_edit_tab_export</name>
+                    <block>dolist_edit_tab_export</block>
+                </action>
+                <action method="addTab">
+                    <name>dolist_tab_configuration</name>
+                    <block>dolist_tab_configuration</block>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_customerdolist_index>
+</layout>

@@ -1,0 +1,372 @@
+<?php
+$_htmlId = $this->getHtmlId() ? $this->getHtmlId() : '_' . uniqid();
+$_colspan = 0;
+$_limitRows = 0;
+?>
+<div class="entry-edit">
+
+
+    <?php foreach ($this->getForm()->getElements() as $_element): ?>
+
+        <?php if ($_element->getFieldsetContainerId()): ?>
+        <div id="<?php echo $_element->getFieldsetContainerId(); ?>">
+        <?php endif; ?>
+            <?php if ($_element->getLegend()): ?>
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $_element->getLegend() ?></h4>
+                    <div class="form-buttons"><?php echo $_element->getHeaderBar() ?></div>
+                </div>
+            <?php endif; ?>
+            <?php if (!$_element->getNoContainer()): ?>
+            <div class="fieldset <?php echo $_element->getClass() ?>" id="<?php echo $_element->getHtmlId() ?>">
+                <?php endif; ?>
+                <div class="hor-scroll">
+
+                    <?php if ($_element->getComment()): ?>
+                        <p class="comment"><?php echo $this->escapeHtml($_element->getComment()) ?></p>
+                    <?php endif; ?>
+                    <?php if ($_element->hasHtmlContent()): ?>
+                        <?php echo $_element->getHtmlContent(); ?>
+                    <?php else: ?>
+                        <table cellspacing="0" class="<?php echo $_element->hasTableClass() ? $_element->getTableClass() : 'form-list'?>">
+                            <tbody>
+                            <?php echo $_element->getChildrenHtml(); ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+
+                    <?php if ($_element->getHtmlId() == 'dolist_conf_data_dolist_form_config_custom_fields'): ?>
+                        <!-- Grid custom field Str -->
+                        <div class="grid" id="grid<?php echo $_htmlId ?>Str">
+                            <h3><?php echo Mage::helper('dolist')->__('Custom string fields') ?></h3>
+                            <table cellpadding="0" cellspacing="0" class="border">
+                                <tbody>
+
+                                <tr class="headings" id="headings<?php echo $_htmlId ?>Str">
+                                    <?php foreach ($this->_columnsDate as $columnName => $column):?>
+                                        <th style="width: 45%;"><?php echo $column['label'] ?></th>
+                                    <?php endforeach;?>
+                                    <th style="width: 10%;"></th>
+                                </tr>
+
+                                <tr id="addRow<?php echo $_htmlId ?>Str">
+                                    <td colspan="<?php echo count($this->_columnsStr) ?>"></td>
+                                    <td <?php echo $_colspan?>>
+                                        <button style="" onclick="" class="scalable add" type="button" id="addToEndBtn<?php echo $_htmlId ?>Str">
+                                            <span><?php echo Mage::helper('dolist')->__('Add') ?></span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="mappingStr[__empty]" value="" />
+                        </div>
+                        <!-- END Grid custom field Str -->
+
+                        <!-- Grid custom field Int -->
+                        <div class="grid" id="grid<?php echo $_htmlId ?>Int">
+                            <h3><?php echo Mage::helper('dolist')->__('Custom int fields') ?></h3>
+                            <table cellpadding="0" cellspacing="0" class="border">
+                                <tbody>
+
+                                <tr class="headings" id="headings<?php echo $_htmlId ?>Int">
+                                    <?php foreach ($this->_columnsDate as $columnName => $column):?>
+                                        <th style="width: 45%;"><?php echo $column['label'] ?></th>
+                                    <?php endforeach;?>
+                                    <th style="width: 10%;"></th>
+                                </tr>
+
+                                <tr id="addRow<?php echo $_htmlId ?>Int">
+                                    <td colspan="<?php echo count($this->_columnsInt) ?>"></td>
+                                    <td <?php echo $_colspan?>>
+                                        <button style="" onclick="" class="scalable add" type="button" id="addToEndBtn<?php echo $_htmlId ?>Int">
+                                            <span><?php echo Mage::helper('dolist')->__('Add') ?></span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="mappingInt[__empty]" value="" />
+                        </div>
+                        <!-- END Grid custom field Int -->
+
+                        <!-- Grid custom field Date -->
+                        <div class="grid" id="grid<?php echo $_htmlId ?>Date">
+                            <h3><?php echo Mage::helper('dolist')->__('Custom date fields') ?></h3>
+                            <table cellpadding="0" cellspacing="0" class="border">
+                                <tbody>
+
+                                <tr class="headings" id="headings<?php echo $_htmlId ?>Date">
+                                    <?php foreach ($this->_columnsDate as $columnName => $column):?>
+                                        <th style="width: 45%;"><?php echo $column['label'] ?></th>
+                                    <?php endforeach;?>
+                                    <th style="width: 10%;"></th>
+                                </tr>
+
+                                <tr id="addRow<?php echo $_htmlId ?>Date">
+                                    <td colspan="<?php echo count($this->_columnsDate) ?>"></td>
+                                    <td <?php echo $_colspan?>>
+                                        <button style="" onclick="" class="scalable add" type="button" id="addToEndBtn<?php echo $_htmlId ?>Date">
+                                            <span><?php echo Mage::helper('dolist')->__('Add') ?></span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="mappingDate[__empty]" value="" />
+                        </div>
+                        <!-- END Grid custom field Date -->
+
+                    <?php endif; ?>
+                </div>
+                <?php echo $_element->getSubFieldsetHtml() ?>
+                <?php if (!$_element->getNoContainer()): ?>
+            </div>
+            <?php endif; ?>
+        <?php if ($_element->getFieldsetContainerId()): ?>
+        </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function updateConfigStartDateVisibility() {
+        if($('dolist_conf_calculatedfieds_mode').value != 2) {
+            $('dolist_conf_calculatedfieds_date').ancestors()[1].hide();
+            $('dolist_conf_calculatedfieds_date').value = '';
+        }
+        else {
+            $('dolist_conf_calculatedfieds_date').ancestors()[1].show();
+        }
+    }
+
+    Event.observe('dolist_conf_calculatedfieds_mode', 'change', function() {
+        updateConfigStartDateVisibility();
+    });
+    updateConfigStartDateVisibility();
+
+    //]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    // create row creator
+    var arrayRow<?php echo $_htmlId ?>Str = {
+        // define row prototypeJS template
+        template : new Template(
+            '<tr id="#{_id}Str">'
+            <?php foreach ($this->_columnsStr as $columnName => $column):?>
+            +'<td>'
+            +'<?php echo $this->_renderCellTemplateStr($columnName)?>'
+            +'<\/td>'
+            <?php endforeach;?>
+            +'<td><button onclick="arrayRow<?php echo $_htmlId ?>Str.del(\'#{_id}Str\')" class="scalable delete" type="button"><span><?php echo Mage::helper('adminhtml')->__('Delete') ?><\/span><\/button><\/td>'
+            +'<\/tr>'
+        ),
+
+        rowsCount : 0,
+
+        add : function(templateData, insertAfterId)
+        {
+            // generate default template data
+            if ('' == templateData) {
+                var d = new Date();
+                var templateData = {
+                <?php foreach ($this->_columnsStr as $columnName => $column):?>
+                <?php echo $columnName ?> : '',
+                <?php endforeach;?>
+                _id : '_' + d.getTime() + '_' + d.getMilliseconds()
+            };
+        }
+
+        // insert before last row
+        if ('' == insertAfterId) {
+        Element.insert($('addRow<?php echo $_htmlId ?>Str'), {before: this.template.evaluate(templateData)});
+    }
+    // insert after specified row
+    else {
+        Element.insert($(insertAfterId), {after: this.template.evaluate(templateData)});
+    }
+
+    <?php if ($this->_addAfter):?>
+    Event.observe('addAfterBtn' + templateData._id + 'Str', 'click', this.add.bind(this, '', templateData._id));
+    <?php endif;?>
+
+    this.rowsCount += 1;
+
+    },
+
+    del : function(rowId)
+    {
+        $(rowId).remove();
+        this.rowsCount -= 1;
+
+
+        $('addToEndBtn<?php echo $_htmlId ?>Str').show();
+    },
+
+    }
+
+    // bind add action to "Add" button in last row
+    Event.observe('addToEndBtn<?php echo $_htmlId ?>Str', 'click', arrayRow<?php echo $_htmlId ?>Str.add.bind(arrayRow<?php echo $_htmlId ?>Str, '', ''));
+
+    // add existing rows
+    <?php
+    $_addAfterId = "headings{$_htmlId}Str";
+    foreach ($this->getMappingRowsString() as $_rowId => $_row) {
+        echo "arrayRow{$_htmlId}Str.add(" . $_row->toJson() . ", '{$_addAfterId}');\n";
+        $_addAfterId = $_rowId.'Str';
+    }
+    ?>
+    //]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    // create row creator
+    var arrayRow<?php echo $_htmlId ?>Int = {
+        // define row prototypeJS template
+        template : new Template(
+            '<tr id="#{_id}Int">'
+            <?php foreach ($this->_columnsInt as $columnName => $column):?>
+            +'<td>'
+            +'<?php echo $this->_renderCellTemplateInt($columnName)?>'
+            +'<\/td>'
+            <?php endforeach;?>
+            +'<td><button onclick="arrayRow<?php echo $_htmlId ?>Int.del(\'#{_id}Int\')" class="scalable delete" type="button"><span><?php echo Mage::helper('adminhtml')->__('Delete') ?><\/span><\/button><\/td>'
+            +'<\/tr>'
+        ),
+
+        rowsCount : 0,
+
+        add : function(templateData, insertAfterId)
+        {
+            // generate default template data
+            if ('' == templateData) {
+                var d = new Date();
+                var templateData = {
+                <?php foreach ($this->_columnsInt as $columnName => $column):?>
+                <?php echo $columnName ?> : '',
+                    <?php endforeach;?>
+                    _id : '_' + d.getTime() + '_' + d.getMilliseconds()
+            };
+        }
+
+        // insert before last row
+        if ('' == insertAfterId) {
+        Element.insert($('addRow<?php echo $_htmlId ?>Int'), {before: this.template.evaluate(templateData)});
+    }
+    // insert after specified row
+    else {
+        Element.insert($(insertAfterId), {after: this.template.evaluate(templateData)});
+    }
+
+    <?php if ($this->_addAfter):?>
+    Event.observe('addAfterBtn' + templateData._id + 'Int', 'click', this.add.bind(this, '', templateData._id));
+    <?php endif;?>
+
+    this.rowsCount += 1;
+
+    },
+
+    del : function(rowId)
+    {
+        $(rowId).remove();
+        this.rowsCount -= 1;
+
+
+        $('addToEndBtn<?php echo $_htmlId ?>Int').show();
+    },
+
+    }
+
+    // bind add action to "Add" button in last row
+    Event.observe('addToEndBtn<?php echo $_htmlId ?>Int', 'click', arrayRow<?php echo $_htmlId ?>Int.add.bind(arrayRow<?php echo $_htmlId ?>Int, '', ''));
+
+    // add existing rows
+    <?php
+    $_addAfterId = "headings{$_htmlId}Int";
+    foreach ($this->getMappingRowsInt() as $_rowId => $_row) {
+        echo "arrayRow{$_htmlId}Int.add(" . $_row->toJson() . ", '{$_addAfterId}');\n";
+        $_addAfterId = $_rowId.'Int';
+    }
+    ?>
+    //]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    // create row creator
+    var arrayRow<?php echo $_htmlId ?>Date = {
+        // define row prototypeJS template
+        template : new Template(
+            '<tr id="#{_id}Date">'
+            <?php foreach ($this->_columnsDate as $columnName => $column):?>
+            +'<td>'
+            +'<?php echo $this->_renderCellTemplateDate($columnName)?>'
+            +'<\/td>'
+            <?php endforeach;?>
+            +'<td><button onclick="arrayRow<?php echo $_htmlId ?>Date.del(\'#{_id}Date\')" class="scalable delete" type="button"><span><?php echo Mage::helper('adminhtml')->__('Delete') ?><\/span><\/button><\/td>'
+            +'<\/tr>'
+        ),
+
+        rowsCount : 0,
+
+        add : function(templateData, insertAfterId)
+        {
+            // generate default template data
+            if ('' == templateData) {
+                var d = new Date();
+                var templateData = {
+                <?php foreach ($this->_columnsDate as $columnName => $column):?>
+                <?php echo $columnName ?> : '',
+                <?php endforeach;?>
+                _id : '_' + d.getTime() + '_' + d.getMilliseconds()
+            };
+        }
+
+        // insert before last row
+        if ('' == insertAfterId) {
+        Element.insert($('addRow<?php echo $_htmlId ?>Date'), {before: this.template.evaluate(templateData)});
+    }
+    // insert after specified row
+    else {
+        Element.insert($(insertAfterId), {after: this.template.evaluate(templateData)});
+    }
+
+    <?php if ($this->_addAfter):?>
+    Event.observe('addAfterBtn' + templateData._id + 'Date', 'click', this.add.bind(this, '', templateData._id));
+    <?php endif;?>
+
+    this.rowsCount += 1;
+
+    },
+
+    del : function(rowId)
+    {
+        $(rowId).remove();
+        this.rowsCount -= 1;
+
+
+        $('addToEndBtn<?php echo $_htmlId ?>Date').show();
+    },
+
+    }
+
+    // bind add action to "Add" button in last row
+    Event.observe('addToEndBtn<?php echo $_htmlId ?>Date', 'click', arrayRow<?php echo $_htmlId ?>Date.add.bind(arrayRow<?php echo $_htmlId ?>Date, '', ''));
+
+    // add existing rows
+    <?php
+    $_addAfterId = "headings{$_htmlId}Date";
+    foreach ($this->getMappingRowsDate() as $_rowId => $_row) {
+        echo "arrayRow{$_htmlId}Date.add(" . $_row->toJson() . ", '{$_addAfterId}');\n";
+        $_addAfterId = $_rowId.'Date';
+    }
+    ?>
+    //]]>
+</script>

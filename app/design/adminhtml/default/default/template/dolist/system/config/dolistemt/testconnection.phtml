@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    function testEmtConnection() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+
+        params = {
+                accountid: $('dolist_dolist_emt_accountid').value,
+                authentication_key: $('dolist_dolist_emt_authentication_key').value,
+            storeId: <?php echo $this->getStoreId() ?>
+        };
+
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            parameters: params,
+            onSuccess: function(response) {
+                result = '<?php echo $this->__('Connection KO. Try again?') ?>';
+                try {
+                    var connectionStatus = response.responseJSON.connectionStatus;
+                    var templateListUpdated = response.responseJSON.templateListUpdated;
+                    var templateList = response.responseJSON.templateList;
+                    
+                    if (connectionStatus == 1) {
+                        result = '<?php echo $this->__('Connection OK') ?>';
+                        elem.removeClassName('fail').addClassName('success')
+                        
+                        // Check if Dolist-EMT template list has been updated
+                        if (templateListUpdated) {
+                            
+                            var optionsHtml = "";
+                            for (var key in templateList) {
+                                optionsHtml = optionsHtml + "<option value=\"" + key + "\">" + templateList[key] + "</option>\n";
+                            }
+                            
+                            // Update lists
+                            $('dolist_dolist_emt_default_template').update(optionsHtml);
+                            $$('select.dolistemt_email_template_select').each(function(selector) {
+                                selector.update(optionsHtml);
+                            });
+                            
+                            // Warn administrator
+                            alert("<?php echo $this->__('Warning! Dolist-EMT templates have been updated. Please double check your configuration in below fields') ?>");
+                        }
+                    } else {
+                        elem.removeClassName('success').addClassName('fail')
+                    }
+                } catch (e) {
+                    elem.removeClassName('success').addClassName('fail')
+                }
+                $('dolist_emt_connection_test_result').update(result);
+            }
+        });
+    }
+    
+    function resetEmtTestButton() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+        var defaultmsg = '<?php echo $this->escapeHtml($this->getButtonLabel()) ?>';
+        elem.removeClassName('success').removeClassName('fail');
+        $('dolist_emt_connection_test_result').update(defaultmsg);
+    }
+    
+    // Reset test button if fields are modified
+    $('dolist_dolist_emt_login').observe('change', resetEmtTestButton);
+    $('dolist_dolist_emt_password').observe('change', resetEmtTestButton);
+</script>
+<button onclick="javascript:testEmtConnection(); return false;" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+    <span id="dolist_emt_connection_test_result"><?php echo $this->escapeHtml($this->getButtonLabel()) ?></span>
+</button>

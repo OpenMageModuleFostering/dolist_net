@@ -1,0 +1,33 @@
+<?php
+/** @var Dolist_Net_Block_Adminhtml_Edit_Tab_Export $this */
+?>
+<?php echo $this->getChildHtml(); ?>
+<table class="form-list">
+    <tr>
+        <td class="scope-label">
+            <button onclick="setLocation('<?php echo $this->getFullExportUrl()?>')" type="button" class="scalable"><span><?php echo Mage::helper('dolist')->__('Full export') ?></span></button>
+        </td>
+        <td class="scope-label">
+            <?php echo Mage::helper('dolist')->__('Full export exportes all Magento contacts (newsletter subscribers) to Dolist-V8 platform.')?>
+        </td>
+    </tr>
+    <tr>
+        <td class="scope-label">
+            <button onclick="setLocation('<?php echo $this->getDifferentialExportUrl()?>')" type="button" class="scalable"><span><?php echo Mage::helper('dolist')->__('Differential export') ?></span></button>
+        </td>
+        <td class="scope-label">
+            <?php echo Mage::helper('dolist')->__('Differential export exports only Magento contacts modified from last full or differential export. At least one full export should have been performed.')?>
+        </td>
+    </tr>
+    <?php if ($this->showCustomerSegment()): ?>
+        <tr>
+            <td class="scope-label">
+                <button onclick="setLocation('<?php echo $this->getUpdateSegmentsUrl()?>')" type="button" class="scalable"><span><?php echo Mage::helper('dolist')->__('Update customer segments') ?></span></button>
+            </td>
+            <td class="scope-label">
+                <?php echo Mage::helper('dolist')->__('Exports again all already exported segments.')?>
+            </td>
+        </tr>
+    <?php endif; ?>
+</table>
+
