@@ -761,7 +761,7 @@ class Dolist_Net_Model_Service extends Varien_Object
                 ->addAttributeToSelect('customer_id')
                 ->addFieldToFilter('main_table.store_id', $storeId)
                 ->getSelect();
-            $select1->join($this->getTable('customer_entity'), 'main_table.customer_id = ' . $this->getTable('customer_entity') . '.entity_id', null);
+            $select1->join(Mage::helper('dolist')->getTablename('customer_entity'), 'main_table.customer_id = ' . Mage::helper('dolist')->getTablename('customer_entity') . '.entity_id', null);
 
             $select2 = Mage::getModel('newsletter/subscriber')
                 ->getCollection()
@@ -777,9 +777,9 @@ class Dolist_Net_Model_Service extends Varien_Object
 
             $query = new Varien_Db_Select($select1->getAdapter());
             $query->from(array('subscriber_extract' => $innerQuery));
-            $query->joinLeft($this->getTable('customer_entity'), 'subscriber_extract.customer_id = ' . $this->getTable('customer_entity') . '.entity_id');
-            $query->joinLeft($this->getTable('newsletter_subscriber'), 'subscriber_extract.customer_id = ' . $this->getTable('newsletter_subscriber') . '.customer_id AND ' . $this->getTable('newsletter_subscriber') . '.customer_id != 0');
-            $query->joinLeft(array($this->getTable('newsletter_subscriber') . '_guest' => $this->getTable('newsletter_subscriber')), 'subscriber_extract.customer_id = ' . $this->getTable('newsletter_subscriber') . '_guest' . '.subscriber_email AND ' . $this->getTable('newsletter_subscriber') . '_guest.customer_id = 0');
+            $query->joinLeft(Mage::helper('dolist')->getTablename('customer_entity'), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('customer_entity') . '.entity_id');
+            $query->joinLeft(Mage::helper('dolist')->getTablename('newsletter_subscriber'), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '.customer_id AND ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '.customer_id != 0');
+            $query->joinLeft(array(Mage::helper('dolist')->getTablename('newsletter_subscriber') . '_guest' => Mage::helper('dolist')->getTablename('newsletter_subscriber')), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '_guest' . '.subscriber_email AND ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '_guest.customer_id = 0');
 
             $query->reset(Zend_Db_Select::COLUMNS);
             if ($count) {
@@ -798,15 +798,15 @@ class Dolist_Net_Model_Service extends Varien_Object
                 ->reset(Zend_Db_Select::COLUMNS)
                 ->reset(Zend_Db_Select::FROM)
                 ->reset(Zend_Db_Select::WHERE)
-                ->from($this->getTable('newsletter_subscriber'), '')
-                ->where($this->getTable('newsletter_subscriber') . '.store_id = ?', $storeId);
+                ->from(Mage::helper('dolist')->getTablename('newsletter_subscriber'), '')
+                ->where(Mage::helper('dolist')->getTablename('newsletter_subscriber') . '.store_id = ?', $storeId);
 
             if ($count) {
                 $query
                     ->reset(Zend_Db_Select::COLUMNS)
-                    ->columns('COUNT(DISTINCT newsletter_subscriber.customer_id) as total');
+                    ->columns('COUNT(DISTINCT '.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id) as total');
             } else {
-                $query->columns('IF(newsletter_subscriber.customer_id=0, subscriber_email, newsletter_subscriber.customer_id) AS customer_id')->distinct();;
+                $query->columns('IF('.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id=0, subscriber_email, '.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id) AS customer_id')->distinct();;
             }
         }
 
@@ -816,31 +816,31 @@ class Dolist_Net_Model_Service extends Varien_Object
             $date->setTimestamp($differential);
 
             if ($exportWithCustomer) {
-                $query->joinLeft($this->getTable('customer_address_entity'), 'subscriber_extract.customer_id = ' . $this->getTable('customer_address_entity') . '.parent_id', null);
-                $query->joinLeft($this->getTable('dolist_dolistv8_calculatedfields'), 'subscriber_extract.customer_id = ' . $this->getTable('dolist_dolistv8_calculatedfields') . '.customer_id', null);
-                $query->joinLeft($this->getTable('sales_flat_quote'), 'subscriber_extract.customer_id = ' . $this->getTable('sales_flat_quote') . '.customer_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('customer_address_entity'), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('customer_address_entity') . '.parent_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields'), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . '.customer_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('sales_flat_quote'), 'subscriber_extract.customer_id = ' . Mage::helper('dolist')->getTablename('sales_flat_quote') . '.customer_id', null);
 
                 $query->where(
-                    $this->getTable('customer_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('customer_address_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('dolist_dolistv8_calculatedfields') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('sales_flat_quote') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('newsletter_subscriber') . '.updated_at >= ' . $differential
-                    . ' OR ' . $this->getTable('newsletter_subscriber') . '_guest.updated_at >= ' . $differential
+                    Mage::helper('dolist')->getTablename('customer_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('customer_address_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('sales_flat_quote') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '.updated_at >= ' . $differential
+                    . ' OR ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '_guest.updated_at >= ' . $differential
                 );
             }
             else {
-                $query->joinLeft($this->getTable('customer_entity'), 'newsletter_subscriber.customer_id = ' . $this->getTable('customer_entity') . '.entity_id', null);
-                $query->joinLeft($this->getTable('customer_address_entity'), 'newsletter_subscriber.customer_id = ' . $this->getTable('customer_address_entity') . '.parent_id', null);
-                $query->joinLeft($this->getTable('dolist_dolistv8_calculatedfields'), 'newsletter_subscriber.customer_id = ' . $this->getTable('dolist_dolistv8_calculatedfields') . '.customer_id', null);
-                $query->joinLeft($this->getTable('sales_flat_quote'), 'newsletter_subscriber.customer_id = ' . $this->getTable('sales_flat_quote') . '.customer_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('customer_entity'), ''.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id = ' . Mage::helper('dolist')->getTablename('customer_entity') . '.entity_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('customer_address_entity'), ''.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id = ' . Mage::helper('dolist')->getTablename('customer_address_entity') . '.parent_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields'), ''.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id = ' . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . '.customer_id', null);
+                $query->joinLeft(Mage::helper('dolist')->getTablename('sales_flat_quote'), ''.Mage::helper('dolist')->getTablename('newsletter_subscriber').'.customer_id = ' . Mage::helper('dolist')->getTablename('sales_flat_quote') . '.customer_id', null);
 
                 $query->where(
-                    $this->getTable('customer_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('customer_address_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('dolist_dolistv8_calculatedfields') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('sales_flat_quote') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
-                    . ' OR ' . $this->getTable('newsletter_subscriber') . '.updated_at >= ' . $differential
+                    Mage::helper('dolist')->getTablename('customer_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('customer_address_entity') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('sales_flat_quote') . '.updated_at >= \'' . $date->format('Y-m-d\TH:i:sP') . '\''
+                    . ' OR ' . Mage::helper('dolist')->getTablename('newsletter_subscriber') . '.updated_at >= ' . $differential
                 );
             }
 

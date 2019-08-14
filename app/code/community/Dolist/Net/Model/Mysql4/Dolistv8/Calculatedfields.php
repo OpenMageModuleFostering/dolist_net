@@ -40,7 +40,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Calculatedfields extends Mage_Core_Model_
         $select = $readAdapter
             ->select()
             ->from(
-                array('o' => $this->getTable($orderTableName)),
+                array('o' => (string)Mage::getConfig()->getTablePrefix() . $tableName),
                 array(
                     'date' => 'o.created_at'
                 )

@@ -33,7 +33,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_TotalOrderedProducts e
         $select = $readAdapter
             ->select()
             ->from(
-                array('o' => $this->getTable($orderTableName)),
+                array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                 array(
                     'total' => 'SUM(o.total_qty_ordered)'
                 )

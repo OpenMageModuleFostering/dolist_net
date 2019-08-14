@@ -33,7 +33,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_AvgOrderAmountExclTax
         $select = $readAdapter
             ->select()
             ->from(
-                array('o' => $this->getTable($orderTableName)),
+                array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                 array(
                     'total' => 'AVG(o.grand_total - o.tax_amount)'
                 )

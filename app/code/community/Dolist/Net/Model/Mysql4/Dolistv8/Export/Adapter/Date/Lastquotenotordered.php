@@ -27,7 +27,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Date_LastQuoteNotOrdered  
 
         $request = $readAdapter->select()
             ->from(
-                array('q' => $this->getTable($quoteTableName)),
+                array('q' => Mage::helper('dolist')->getTablename($quoteTableName)),
                 array(
                     'q.updated_at'
                 )

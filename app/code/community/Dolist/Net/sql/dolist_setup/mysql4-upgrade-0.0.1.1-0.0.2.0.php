@@ -16,8 +16,8 @@ try {
     // Alter column only if column does not already exist
     $installer->run(
         "
-        DROP TABLE IF EXISTS {$this->getTable('dolist_dolistemt_message_queue')};
-        CREATE TABLE {$this->getTable('dolist_dolistemt_message_queue')} (
+        DROP TABLE IF EXISTS " . Mage::helper('dolist')->getTablename('dolist_dolistemt_message_queue') . ";
+        CREATE TABLE " . Mage::helper('dolist')->getTablename('dolist_dolistemt_message_queue') . " (
           `id` bigint unsigned NOT NULL auto_increment,
           `template_id` int(10) unsigned NOT NULL,
           `serialized_message` LONGTEXT NOT NULL default '',

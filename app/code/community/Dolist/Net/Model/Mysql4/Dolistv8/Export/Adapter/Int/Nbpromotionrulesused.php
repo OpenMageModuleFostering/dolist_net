@@ -26,7 +26,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_NbPromotionRulesUsed e
         // Nested request
         $select = $readAdapter->select()
             ->from(
-                array('s' => $this->getTable($salesruleTableName)),
+                array('s' => Mage::helper('dolist')->getTablename($salesruleTableName)),
                 array(
                     'nb_rules'=>'SUM(s.times_used)'
                 )

@@ -26,7 +26,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Date_LastOrder extends Dol
         }
 
         $select = $readAdapter->select()
-                ->from(array('o' => $this->getTable($tableName)),
+                ->from(array('o' => (string)Mage::getConfig()->getTablePrefix() . $tableName),
                     array(
                         'date'=>'MAX(created_at)'
                     ))

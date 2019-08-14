@@ -14,10 +14,10 @@ $installer->startSetup();
 
 // Create new table to store Dolist-EMT templates
 $installer->run(
-    "ALTER TABLE {$this->getTable('dolist_dolistv8_customfields')} ADD scope VARCHAR(8) AFTER magento_field, ADD scope_id INT AFTER scope;"
+    "ALTER TABLE " . Mage::helper('dolist')->getTablename('dolist_dolistv8_customfields') . " ADD scope VARCHAR(8) AFTER magento_field, ADD scope_id INT AFTER scope;"
 );
 $installer->run(
-    "ALTER TABLE {$this->getTable('dolist_dolistv8_customfields')} ADD CONSTRAINT uc_namescope UNIQUE (name,scope_id)"
+    "ALTER TABLE " . Mage::helper('dolist')->getTablename('dolist_dolistv8_customfields') . " ADD CONSTRAINT uc_namescope UNIQUE (name,scope_id)"
 );
 
 $installer->endSetup();

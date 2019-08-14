@@ -939,4 +939,9 @@ class Dolist_Net_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $flag->getFlagData();
     }
+
+    public function getTablename($table)
+    {
+        return (string)Mage::getConfig()->getTablePrefix() . $table;
+    }
 }

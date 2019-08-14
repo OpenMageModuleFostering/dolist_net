@@ -15,8 +15,8 @@ $installer->startSetup();
 // Create new table to store Dolist-EMT templates
 $installer->run(
     "
-    DROP TABLE IF EXISTS {$this->getTable('dolist_dolistv8_customfields')};
-    CREATE TABLE {$this->getTable('dolist_dolistv8_customfields')} (
+    DROP TABLE IF EXISTS " . Mage::helper('dolist')->getTablename('dolist_dolistv8_customfields') . ";
+    CREATE TABLE " . Mage::helper('dolist')->getTablename('dolist_dolistv8_customfields') . " (
       `id` int(10) unsigned AUTO_INCREMENT,
       `type` varchar(255) NOT NULL,
       `name` varchar(255) NOT NULL,

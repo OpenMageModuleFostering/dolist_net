@@ -30,7 +30,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_LastNotOrderedCartAmou
 
         $request = $readAdapter->select()
             ->from(
-                array('q' => $this->getTable($quoteTableName)),
+                array('q' => Mage::helper('dolist')->getTablename($quoteTableName)),
                 array(
                     'q.base_subtotal_with_discount'
                 )

@@ -16,8 +16,8 @@ $installer->startSetup();
 
 $installer->run(
     "
-        DROP TABLE IF EXISTS {$this->getTable('dolist_dolistv8_calculatedfields')};
-        CREATE TABLE {$this->getTable('dolist_dolistv8_calculatedfields')} (
+        DROP TABLE IF EXISTS " . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . ";
+        CREATE TABLE " . Mage::helper('dolist')->getTablename('dolist_dolistv8_calculatedfields') . " (
           `customer_id` int(10) unsigned,
           `first_order_amount` decimal(12,4) DEFAULT NULL,
           `first_order_amount_with_vat` decimal(12,4) DEFAULT NULL,

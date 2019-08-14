@@ -27,7 +27,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Date_FirstOrder extends Do
         }
 
         $select = $readAdapter->select()
-            ->from(array('o' => $this->getTable($tableName)),
+            ->from(array('o' => (string)Mage::getConfig()->getTablePrefix() . $tableName),
                 array(
                     'date' => 'MIN(created_at)'
                 ))

@@ -28,7 +28,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_AvgNbDifferentProducts
             // Nested request
             $select = $readAdapter->select()
                 ->from(
-                    array('o' => $this->getTable($orderTableName)),
+                    array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                     array(
                         'AVG(o.total_item_count) AS avg_total_item_count'
                     )
@@ -42,12 +42,12 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_AvgNbDifferentProducts
             // Nested request
             $select = $readAdapter->select()
                 ->from(
-                    array('o' => $this->getTable($orderTableName)),
+                    array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                     array(
                         'count(sf.item_id)/count(DISTINCT o.entity_id) as avg_total_item_count'
                     )
                 )->joinLeft(
-                    array('sf' => $this->getTable($orderItemTableName)),
+                    array('sf' => Mage::helper('dolist')->getTablename($orderItemTableName)),
                     "sf.order_id = o.entity_id",
                     array()
                 )

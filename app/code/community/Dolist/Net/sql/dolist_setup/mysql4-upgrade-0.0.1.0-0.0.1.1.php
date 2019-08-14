@@ -16,7 +16,7 @@ try {
     // Alter column only if column does not already exist
     $installer->run(
         "
-        ALTER TABLE {$this->getTable('newsletter_subscriber')}
+        ALTER TABLE " . Mage::helper('dolist')->getTablename('newsletter_subscriber') . "
         DROP COLUMN `updated_at`,
         ADD COLUMN `updated_at` int(10) DEFAULT 0;
         "

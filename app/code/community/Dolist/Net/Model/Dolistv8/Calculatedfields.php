@@ -664,7 +664,7 @@ class Dolist_Net_Model_Dolistv8_Calculatedfields extends Mage_Core_Model_Abstrac
 
         /** @var Varien_Db_Select $select */
         $select = $readAdapter->select();
-        $select->from(array('o' => $this->getTable($tableName)), array('o.created_at'))
+        $select->from(array('o' => (string)Mage::getConfig()->getTablePrefix() . $tableName), array('o.created_at'))
             ->where('o.customer_id=?', $this->getData('customer_id'))
             ->where('o.store_id=?', $this->getData('store_id'))
             ->order('o.created_at DESC')

@@ -29,7 +29,7 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_AvgNbDifferentProducts
             // Nested request
             $select = $readAdapter->select()
                 ->from(
-                    array('o' => $this->getTable($orderTableName)),
+                    array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                     array(
                         'AVG(total_qty_ordered / total_item_count) AS avg_products_per_line'
                     )
@@ -42,12 +42,12 @@ class Dolist_Net_Model_Mysql4_Dolistv8_Export_Adapter_Int_AvgNbDifferentProducts
 
             $select = $readAdapter->select()
             ->from(
-                    array('o' => $this->getTable($orderTableName)),
+                    array('o' => (string)Mage::getConfig()->getTablePrefix() . $orderTableName),
                     array(
                             'SUM(o.total_qty_ordered)/count(sf.item_id) as avg_products_per_line'
                     )
             )->joinLeft(
-                    array('sf' => $this->getTable($orderItemTableName)),
+                    array('sf' => Mage::helper('dolist')->getTablename($orderItemTableName)),
                     "sf.order_id = o.entity_id",
                     array()
             )
